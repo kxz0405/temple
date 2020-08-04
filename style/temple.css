@@ -1,0 +1,171 @@
+@charset "UTF-8";
+@font-face {
+  src: url("font/書法行書.ttf");
+  font-family: calls;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.back-cloud {
+  position: absolute;
+  opacity: 0.5;
+  z-index: -1000;
+}
+
+.back-cloud > img {
+  position: fixed;
+}
+
+.back-cloud > #cloud1 {
+  left: 50%;
+  top: 100px;
+}
+
+.back-cloud > #cloud2 {
+  left: 10%;
+  top: 50%;
+}
+
+.back-cloud > #cloud3 {
+  right: 10%;
+  top: 70%;
+}
+
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 30px;
+}
+
+.header > .logo {
+  width: 650px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.contain {
+  margin: 50px auto;
+}
+
+.contain > .areamenu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 30px;
+  width: 1240px;
+  margin: auto;
+}
+
+.contain > .areamenu > .areatittle {
+  margin: 30px auto;
+  height: 100%;
+  border: 2px solid #944556;
+  background-color: white;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.contain > .areamenu > .areatittle > .arealist {
+  width: 100%;
+  padding: 5px;
+}
+
+.contain > .areamenu > .areatittle > .arealist > .areabox {
+  display: inline-block;
+  width: 90px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.contain > .areamenu > .areatittle > .arealist > .areabox > label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-left: 5px;
+}
+
+.contain > .areamenu > .areatittle > .arealist > .areabox > label > .circlenum {
+  text-align: center;
+  display: inline-block;
+  background-color: cornflowerblue;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  font-size: 12px;
+  font-style: normal;
+  color: white;
+}
+
+.contain > .areamenu > .templelist {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.contain > .areamenu > .templelist > .prompt {
+  text-align: center;
+  font-size: 20px;
+}
+
+.contain > .areamenu > .templelist > .templetitle {
+  text-align: center;
+}
+
+.contain > .areamenu > .templelist > .templetitle > p {
+  font-size: 24px;
+}
+
+.contain > .areamenu > .templelist > .templecard {
+  padding: 30px;
+}
+
+.contain > .areamenu > .templelist > .templecard > .temple-text {
+  border: 2px solid #944556;
+  background-color: white;
+  -webkit-box-shadow: 2px 2px 5px #616161;
+          box-shadow: 2px 2px 5px #616161;
+  padding: 30px;
+  color: #505050;
+}
+
+.contain > .areamenu > .templelist > .templecard > .temple-text > .name {
+  text-align: center;
+  font-size: 20px;
+}
+
+.contain > .areamenu > .templelist > .templecard > .temple-text > .area {
+  width: 80px;
+  text-align: center;
+  background-color: brown;
+  border-radius: 20px;
+  color: white;
+}
+/*# sourceMappingURL=temple.css.map */

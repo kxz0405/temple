@@ -1,0 +1,140 @@
+
+@font-face
+{
+    src: url('font/書法行書.ttf');
+    font-family: calls;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+$baseLineHeigh:12px;
+
+@function line($count: 1) {
+    @return $baseLineHeigh*$count; 
+  }
+
+
+
+.back-cloud{
+    position: absolute;
+    opacity: 0.5;
+    z-index: -1000;
+    >img{
+        position: fixed;
+    }
+    >#cloud1{
+        left: 50%;
+        top: 100px;
+    }
+    >#cloud2{
+        left: 10%;
+        top: 50%;
+    }
+    >#cloud3{
+        right: 10%;
+        top: 70%;
+    }
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+    
+    >.logo{
+        width: 650px;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.contain{
+    margin: 50px auto;
+    
+    >.areamenu{
+        display: flex;
+        padding: 30px;
+        width: 1240px;
+        margin: auto;
+        >.areatittle{
+            margin: 30px auto;
+            height: 100%;
+            border: 2px solid rgb(148, 69, 86);
+            background-color: white;
+            flex: 1;
+            >.arealist{
+                width: 100%;
+                padding: 5px;
+                >.areabox{
+                    display: inline-block;
+                    width: 90px;
+                    justify-content: space-between;
+                    >label{
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        margin-left: 5px;
+                        >.circlenum{
+                            text-align: center;
+                            display: inline-block;
+                            background-color: cornflowerblue;
+                            border-radius: 50%;
+                            height: 20px;
+                            width: 20px;
+                            font-size: 12px;
+                            font-style: normal;
+                            color: rgb(255, 255, 255);
+                        }
+
+                    }
+                }
+            }
+        }
+        >.templelist{
+            flex: 3;
+            display: flex;
+            flex-wrap: wrap;
+            >.prompt{
+                text-align: center;
+                font-size: 20px;
+            }
+            >.templetitle{
+                text-align: center;
+                >p{
+                    font-size: line(2);
+
+                }
+            }      
+            >.templecard{
+                padding: 30px;
+                >.temple-text{
+                    border: 2px solid rgb(148, 69, 86);
+                    background-color: white;
+                    box-shadow: 2px 2px 5px rgb(97, 97, 97);
+                    padding: 30px;
+                    color: rgb(80, 80, 80);
+                    >.name{
+                        text-align: center;
+                        font-size: 20px;
+                    }
+                    >.area{
+                        width: 80px;
+                        text-align: center;
+                        background-color: brown;
+                        border-radius: 20px;
+                        color: white;
+                    }
+                }
+            }
+        }   
+    }
+
+    
+}
+

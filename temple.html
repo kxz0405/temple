@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <link rel="stylesheet" href="./dist/style/temple.min.css">
+    <title>台中廟宇GO</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="back-cloud">
+            <img id="cloud1" src="./img/images/cloud.png" alt="">
+            <img id="cloud2" src="./img/images/cloud.png" alt="">
+            <img id="cloud3" src="./img/images/cloud.png" alt="">
+        </div>
+
+        <div class="header">
+            <div class="logo">
+                <img src="./img/images/logo.png" alt="">
+            </div>
+            <!-- <div class="searchbar">
+                <input type="text" name="" id="">
+            </div> -->
+        </div>
+
+        <div class="contain">
+            <div class="areamenu">
+                <div class="areatittle">
+
+                    <span>地區選擇</span>
+                    <span>共有{{showlist.length}}間</span>
+                    <div class="arealist">
+                        <div class="areabox" v-for='(area,index) in list'>
+                            <!-- <i :class="iconA" id="circle"
+                                @click="cri(index)"></i> -->
+                            <label>
+                                <input type="checkbox" name="" id="cc" @click='cri(index)'>
+                                <span>{{area.area}}</span>
+                                <i class="circlenum">{{area.areanum}}</i>
+                            </label>
+
+                        </div>
+
+                        <div class="cancelBtn">
+                            取消篩選
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="templelist">
+                    <div class="prompt col-md-12">請選擇地區</div>
+                    <div class="templecard col-md-6" v-for='(data,index) in showlist'>
+                        <div class="temple-text">
+                            <p class="name">{{data.name}}</p>
+                            <hr>
+                            <p class="area">{{data.area}}</p>
+                            <p class="">{{data.address}}</p>
+                            <p>主神:{{data.god}}</p>
+                            <p>電話:{{data.number}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script src="jquery-3.4.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- <script src="bootstrap.min.js"></script> -->
+
+    <script src="vue.js"></script>
+
+
+    <script>
+
+
+
+
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                contact: [],
+                list: [],
+                showlist: [],
+            },
+            mounted() {
+                axios.get('https://datacenter.taichung.gov.tw/swagger/OpenData/f246d012-c1f3-4dac-a946-bc2df3d5f6c6').then((res) => {
+                    let total = res.data.length
+                    let num = 0;
+                    var inputcheck = document.getElementById('cc')
+
+                    //Json刪除空值資料
+                    for (i = 0; i < res.data.length; i++) {
+                        if (res.data[i].行政區 == "") {
+                            let nolist = total - i
+                            res.data.splice(i, nolist)
+                        }
+                    }
+                    this.contact = res.data
+
+
+
+                    res.data.sort()
+                    // 判斷list裡面只要沒有這個行政區，就push進去。
+                    for (j = 0; j < res.data.length; j++) {
+
+                        // console.log(res.data[j].行政區)
+                        //搜尋this.list裡面有沒有，現在res.data[j]行政區
+                        var result = $.map(this.list, function (item) {
+                            return item.area;
+                        }).indexOf(res.data[j].行政區);
+
+                        //如果沒有，result傳回-1。代表this.list裡面沒有，那就要push進去。
+                        if (result == -1) {
+
+                            //計算push進來的行政區，總共有幾筆一樣"行政區"的地方。
+                            res.data.forEach(element => {
+                                if (element.行政區 == res.data[j].行政區) {
+                                    num += 1;
+                                }
+                            });
+                            let putdata = {
+                                area: res.data[j].行政區,
+                                areanum: num
+                            }
+                            num = 0;
+                            this.list.push(putdata)
+                        }
+                    }
+
+                })
+            },
+
+
+            methods: {
+
+                cri(id) {
+                    var cri = $.map(this.showlist, function (item) {
+                        return item.area;
+                    }).indexOf(this.list[id].area);
+
+                    //如果showlist裡面沒有的話。
+                    if (cri == -1) {
+                        //只要是contact(全部廟宇)跟點擊的行政區相同，那就把一樣行政區的所有廟宇需要的資訊全都push進showlist。
+                        for (a = 0; a < this.contact.length; a++) {
+                            if (this.list[id].area == this.contact[a].行政區) {
+                                let putshow = {
+                                    name: this.contact[a].寺廟名稱,
+                                    area: this.contact[a].行政區,
+                                    god: this.contact[a].主祀神祇,
+                                    address: this.contact[a].地址,
+                                    number: this.contact[a].電話,
+                                }
+                                this.showlist.push(putshow)
+                            }
+                        }
+
+                    }
+                    //如果showlist裡面有的話，那就必須刪除和this.list.area一樣的showlist.area。
+                    else {
+                        // console.log(this.list[id].areanum)
+                        //找出showlist.area和list.area一樣的資料，進行刪除。
+                        for (b = 0; b < this.showlist.length; b++) {
+                            if (this.list[id].area == this.showlist[b].area) {
+                                //b是找到一樣資料的第一筆，areanum是這個行政區總共有幾筆。                          
+                                this.showlist.splice(b, this.list[id].areanum)
+                            }
+                        }
+                    }
+
+                },
+            },
+
+
+
+            computed: {
+
+            }
+
+        })
+
+    </script>
+</body>
+
+</html>
